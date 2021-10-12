@@ -7,14 +7,14 @@ def main():
     img = cv2.imread("apollo.jpg")
     img = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY) 
     row,col = img.shape
-    kernel = noise_reduction(5)
+    kernel = noise_reduction(5,1)
     cv2.imshow('image', img)
-    immg = convolve(img, kernel)
+    img = convolve(img, kernel)
 
     cv2.imshow('convolved image', img)
     cv2.waitKey(0)
 
-def noise_reduction(size, sigma = 1):
+def noise_reduction(size, sigma):
     size = size // 2
     x, y = np.mgrid[-size:size+1, -size:size+1]
     normal = 1 / (2.0 * np.pi * sigma**2)
