@@ -24,7 +24,7 @@ def non_max_suppression(img, angleDirection):
             angle = angleDirection[i][j]
 
             #Checks the pixels on the left and right
-            if((0 <= angleDirection < np.pi/4) or (7*np.pi/4 <= angleDirection < 2*pi)):
+            if((0 <= angleDirection < np.pi/4) or (7*np.pi/4 <= angleDirection < 2*np.pi)):
                 prevPixel = img[i, j-1]
                 nextPixel = img[i, j+1]
             #Checks the pixels on the top right and bottom left
