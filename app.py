@@ -14,6 +14,7 @@ def main():
 
     cv2.imshow('convolved image', img)
     cv2.waitKey(0)
+    
 
 def noise_reduction(size, sigma):
     size = size // 2
@@ -23,7 +24,10 @@ def noise_reduction(size, sigma):
     return g
     
 
-def non_max_suppression(img):
+def non_max_suppression():
+    print("Placeholder")
+
+def gradient_calculation(img):
     Kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], np.float32)
     Ky = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]], np.float32)
 
@@ -35,9 +39,6 @@ def non_max_suppression(img):
     theta = np.arctan2(Iy, Ix)
     
     return (G, theta)
-
-def gradient_calculation():
-    print("placeholder")
 
 def double_threshold():
     print("placeholder")
