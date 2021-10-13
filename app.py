@@ -4,7 +4,7 @@ from scipy import ndimage
 
 def main():
     # Read the image
-    img = cv2.imread("apollo.jpg")
+    img = cv2.imread("mask.jpg")
     # Set the image to grayscale
     img = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY) 
     cv2.imshow('image', img)
@@ -17,9 +17,22 @@ def main():
     
     # Get gradient calculated image
     g, slope = gradient_calculation(img)
+    cv2.imshow('gradient calculated image', img)
+    cv2.waitKey(0)
+    
     # Non-Max Suppression
     img = non_max_suppression(g, slope)
     cv2.imshow('non-max suppression image', img)
+    cv2.waitKey(0)
+
+    # double-threshold Suppression
+    img = double_threshold(img, 0.05, 0.15)
+    cv2.imshow('double-threshold image', img)
+    cv2.waitKey(0)
+
+    # hy Suppression
+    img = hysteresis(img)
+    cv2.imshow('hysteresis image', img)
     cv2.waitKey(0)
 
     
@@ -41,7 +54,7 @@ def non_max_suppression(img, angleDirection):
     #Gets the size of the image
     (row, col) = img.shape
     #Creates a matrix of zeros
-    nonMaxMatrix = np.zeros((row, col), dtype=np.int32)
+    nonMaxMatrix = np.zeros((row, col), dtype=np.uint8)
     # Get the angle
     angle = angleDirection * 180. / np.pi
     # Any values less than 0, add 180 to them
@@ -82,8 +95,8 @@ def non_max_suppression(img, angleDirection):
     return nonMaxMatrix
 
 def gradient_calculation(img):
-    Kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], np.float32)
-    Ky = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]], np.float32)
+    Kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], np.uint8)
+    Ky = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]], np.uint8)
 
     Ix = ndimage.filters.convolve(img, Kx)
     Iy = ndimage.filters.convolve(img, Ky)
@@ -104,12 +117,12 @@ def double_threshold(img, lowRatio, highRatio):
     m, n = img.shape
     
     # Create a resulting 2D array
-    res = np.zeros((m, n), dtype=np.int32)
+    res = np.zeros((m, n), dtype=np.uint8)
 
     # Grey color used to make weak pixels
-    grey = np.int32(25)
+    grey = np.uint8(25)
     # White color used to mark strong pixels
-    white = np.int32(255)
+    white = np.uint8(255)
 
     # Get the locations of all the pixels with values greater than the high value
     # These are known as strong pixels
@@ -132,9 +145,9 @@ def hysteresis(img):
     m, n = img.shape
 
     # Grey color used to find weak pixels
-    grey = np.int32(25)
+    grey = np.uint8(25)
     # White color used to mark strong pixels
-    white = np.int32(255)
+    white = np.uint8(255)
 
     # Iterate through the rows
     for i in range(1, m-1):
@@ -156,6 +169,7 @@ def hysteresis(img):
                 # Catch the index out of bounds error and continue
                 except IndexError:
                     pass
+    return img
 
 if __name__ == "__main__":
     main()
