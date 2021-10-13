@@ -42,10 +42,8 @@ def non_max_suppression(img, angleDirection):
             #If the intensity of the current pixel is greater than the previous or next pixel, assign the value in the non max matrix
             if((img[i, j] >= prevPixel) and (img(i,j) >= nextPixel)):
                 nonMaxMatrix[i, j] = img[i][j]   
-        
-
     
-
+    # Return the matrix
     return nonMaxMatrix
 
 
