@@ -32,19 +32,19 @@ def non_max_suppression(img, angleDirection):
                 prevPixel = img[i+1, j-1]
                 nextPixel = img[i-1, j+1]
             #Checks the pixels on the top middle and bottom middle
-            elif((np.pi/2 <= angleDirection < 3*np.pi/4) or (3*np.pi/2 <= angleDirection < 7*np.pi/2)):
+            elif((np.pi/2 <= angleDirection < 3*np.pi/4) or (3*np.pi/2 <= angleDirection < 7*np.pi/4)):
                 prevPixel = img[i-1, j-1]
                 nextPixel = img[i+1, j+1]
             #Checks the pixels on the top left and bottom right
+            #Default case
             else:
                 prevPixel = img[i-1, j-1]
                 nextPixel = img[i+1, j+1]
             
+            #If the intensity of the current pixel is greater than the previous or next pixel, assign the value in the non max matrix
             if((img[i, j] >= prevPixel) and (img(i,j) >= nextPixel)):
                 nonMaxMatrix[i, j] = img[i][j]   
             
-
-
     return nonMaxMatrix
 
 
