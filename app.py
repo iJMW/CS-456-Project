@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from scipy import ndimage
 
 def main():
     print("placeholder")
@@ -9,7 +10,7 @@ def main():
     row,col = img.shape
     kernel = noise_reduction(5,1)
     cv2.imshow('image', img)
-    img = convolve(img, kernel)
+    img = ndimage.filters.convolve(img, kernel)
 
     cv2.imshow('convolved image', img)
     cv2.waitKey(0)
@@ -22,8 +23,8 @@ def noise_reduction(size, sigma):
     return g
     
 
-def non_max_suppression():
-    print("Placeholder")
+def non_max_suppression(img):
+    print("placeholder")
 
 def gradient_calculation():
     print("placeholder")
@@ -34,16 +35,7 @@ def double_threshold():
 def hysteresis():
     print("placeholder")
 
-def convolve(image, kernel):
-  rkernel=np.rot90(kernel,2)
-  output = np.zeros((1+image.shape[0]-kernel.shape[0],1+image.shape[1]-kernel.shape[1]), dtype=image.dtype)
-  for i in range(0,output.shape[0]):
-   for j in range(0,output.shape[1]):
-    signal_patch = image[i:i+kernel.shape[0],j:j+kernel.shape[1]]
-    tmp = (rkernel * signal_patch).sum()
-    '''not really the best method to normalize the image'''
-    output[i,j]=tmp
-  return output
+
 
 if __name__ == "__main__":
     main()
