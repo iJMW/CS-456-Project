@@ -15,10 +15,15 @@ def main():
     cv2.waitKey(0)
     
 def noise_reduction(img,size, sigma):
+    #set size
     size = size // 2
+    #set kernel x and y
     x, y = np.mgrid[-size:size+1, -size:size+1]
+    #normalize
     normal = 1 / (2.0 * np.pi * sigma**2)
+    #create kernel
     kernel =  np.exp(-((x**2 + y**2) / (2.0*sigma**2))) * normal
+    #apply kernel to image
     conv_img = ndimage.filters.convolve(img, kernel)
     return conv_img
 
