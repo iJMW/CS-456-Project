@@ -15,7 +15,6 @@ def main():
     cv2.imshow('convolved image', img)
     cv2.waitKey(0)
     
-
 def noise_reduction(size, sigma):
     size = size // 2
     x, y = np.mgrid[-size:size+1, -size:size+1]
@@ -23,7 +22,6 @@ def noise_reduction(size, sigma):
     g =  np.exp(-((x**2 + y**2) / (2.0*sigma**2))) * normal
     return g
     
-
 #Check angle parameter?
 def non_max_suppression(img, angleDirection):
     #Gets the size of the image
@@ -62,11 +60,6 @@ def non_max_suppression(img, angleDirection):
     
     # Return the matrix
     return nonMaxMatrix
-
-
-
-
-
 
 def gradient_calculation(img):
     Kx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], np.float32)
@@ -114,7 +107,6 @@ def double_threshold(img, lowRatio, highRatio):
     # Return the resulting image
     return res
 
-
 def hysteresis(img):
     # Get the row and columns of the image
     m, n = img.shape
@@ -144,8 +136,6 @@ def hysteresis(img):
                 # Catch the index out of bounds error and continue
                 except IndexError:
                     pass
-
-
 
 if __name__ == "__main__":
     main()
