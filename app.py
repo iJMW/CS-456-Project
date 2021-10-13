@@ -6,19 +6,21 @@ def main():
     img = cv2.imread("apollo.jpg")
     img = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY) 
     row,col = img.shape
-    kernel = noise_reduction(5,1)
+   
     cv2.imshow('image', img)
-    img = ndimage.filters.convolve(img, kernel)
+    
+    img = noise_reduction(img, 5, 1.5)
 
     cv2.imshow('convolved image', img)
     cv2.waitKey(0)
     
-def noise_reduction(size, sigma):
+def noise_reduction(img,size, sigma):
     size = size // 2
     x, y = np.mgrid[-size:size+1, -size:size+1]
     normal = 1 / (2.0 * np.pi * sigma**2)
-    g =  np.exp(-((x**2 + y**2) / (2.0*sigma**2))) * normal
-    return g
+    kernel =  np.exp(-((x**2 + y**2) / (2.0*sigma**2))) * normal
+    conv_img = ndimage.filters.convolve(img, kernel)
+    return conv_img
 
 #Gets rid of extra edges
 def non_max_suppression(img, angleDirection):
