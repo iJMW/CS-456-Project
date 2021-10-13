@@ -20,19 +20,17 @@ def non_max_suppression(img, angleDirection):
             #Assigns the neighboring pixels adjacent to the current pixel
             prevPixel = img[i][j]
             nextPixel = img[i][j]
-            #Assigns the angle of the pixels from the gradient step
-            angle = angleDirection[i][j]
 
             #Checks the pixels on the left and right
-            if((0 <= angleDirection < np.pi/4) or (7*np.pi/4 <= angleDirection < 2*np.pi)):
+            if((0 <= angleDirection[i][j] < np.pi/4) or (7*np.pi/4 <= angleDirection[i][j] < 2*np.pi)):
                 prevPixel = img[i, j-1]
                 nextPixel = img[i, j+1]
             #Checks the pixels on the top right and bottom left
-            elif((np.pi/4 <= angleDirection < np.pi/2) or (5*np.pi/4 <= angleDirection < 3*np.pi/2)):
+            elif((np.pi/4 <= angleDirection[i][j] < np.pi/2) or (5*np.pi/4 <= angleDirection[i][j] < 3*np.pi/2)):
                 prevPixel = img[i+1, j-1]
                 nextPixel = img[i-1, j+1]
             #Checks the pixels on the top middle and bottom middle
-            elif((np.pi/2 <= angleDirection < 3*np.pi/4) or (3*np.pi/2 <= angleDirection < 7*np.pi/4)):
+            elif((np.pi/2 <= angleDirection[i][j] < 3*np.pi/4) or (3*np.pi/2 <= angleDirection[i][j] < 7*np.pi/4)):
                 prevPixel = img[i-1, j-1]
                 nextPixel = img[i+1, j+1]
             #Checks the pixels on the top left and bottom right
@@ -44,7 +42,10 @@ def non_max_suppression(img, angleDirection):
             #If the intensity of the current pixel is greater than the previous or next pixel, assign the value in the non max matrix
             if((img[i, j] >= prevPixel) and (img(i,j) >= nextPixel)):
                 nonMaxMatrix[i, j] = img[i][j]   
-            
+        
+
+    
+
     return nonMaxMatrix
 
 
