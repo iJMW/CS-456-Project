@@ -3,8 +3,6 @@ import numpy as np
 from scipy import ndimage
 
 def main():
-    print("placeholder")
-
     img = cv2.imread("apollo.jpg")
     img = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY) 
     row,col = img.shape
@@ -21,8 +19,8 @@ def noise_reduction(size, sigma):
     normal = 1 / (2.0 * np.pi * sigma**2)
     g =  np.exp(-((x**2 + y**2) / (2.0*sigma**2))) * normal
     return g
-    
-#Check angle parameter?
+
+#Gets rid of extra edges
 def non_max_suppression(img, angleDirection):
     #Gets the size of the image
     (row, col) = img.Shape
