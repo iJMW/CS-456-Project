@@ -36,6 +36,34 @@ def main():
     cv2.imshow('hysteresis image', img)
     cv2.waitKey(0)
   
+def runAlgorithm(filePath: str):
+    # Read the image
+    img = cv2.imread(filePath)
+    # Set the image to grayscale
+    img = np.float32(cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY))
+    img = img / img.max()
+    
+    # Get the noised reduced image
+    img = noise_reduction(img, 5, 1.5)
+    
+    # Get gradient calculated image
+    g, slope = gradient_calculation(img)
+    
+    # Non-Max Suppression
+    img = non_max_suppression(g, slope)
+
+    # double-threshold Suppression
+    img = double_threshold(img, 0.05, 0.15)
+
+    # hy Suppression
+    img = hysteresis(img)
+
+    cv2.imwrite("edge_" + filePath, img)
+
+    # Return the image
+    return img
+    
+
 def noise_reduction(img, size, sigma):
     #set size
     size = size // 2
