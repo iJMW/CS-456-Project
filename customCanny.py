@@ -58,7 +58,13 @@ def runAlgorithm(filePath: str):
     # hy Suppression
     img = hysteresis(img)
 
-    cv2.imwrite("edge_" + filePath, img)
+    # Write the file
+    indexSlash = filePath.rfind('/')
+    indexPeriod = filePath.rfind('.')
+    remove = len(filePath) - indexPeriod
+    fileName = filePath[indexSlash+1:-remove]
+    cv2.imwrite("./Output/" + fileName + "/edge_" + fileName + ".jpg", img)
+    
 
     # Return the image
     return img
