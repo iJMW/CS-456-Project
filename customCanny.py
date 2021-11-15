@@ -63,13 +63,12 @@ def runAlgorithm(filePath: str):
     indexPeriod = filePath.rfind('.')
     remove = len(filePath) - indexPeriod
     fileName = filePath[indexSlash+1:-remove]
-    cv2.imwrite("./Output/" + fileName + "/edge_" + fileName + ".jpg", img)
+    filepath = "./Output/" + fileName + "/edge_" + fileName + ".jpg"
+    cv2.imwrite(filepath, img)
     
-
     # Return the image
-    return img
+    return filepath
     
-
 def noise_reduction(img, size, sigma):
     #set size
     size = size // 2
