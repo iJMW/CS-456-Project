@@ -40,6 +40,7 @@ class Gui:
         self.file_path = "./TestImages/testImage.jpg"
         self.folder_name = "TestImages"
         original_img = PIL.Image.open(self.file_path)
+        original_img = original_img.resize((750, 500))
         self.img = PIL.ImageTk.PhotoImage(original_img)
         self.image_label = tkinter.Label(self.left_frame, image = self.img)
         self.image_label.grid(row = 1)     
@@ -101,7 +102,9 @@ class Gui:
     # Used to update the image in the GUI
     def updateImage(self):
         # Update the image in the GUI
-        self.img = PIL.ImageTk.PhotoImage(PIL.Image.open(self.file_path))
+        original_img = PIL.Image.open(self.file_path)
+        original_img = original_img.resize((750, 500))
+        self.img = PIL.ImageTk.PhotoImage(original_img)
         self.image_label.configure(image=self.img)
         self.image_label.image = self.img
 
