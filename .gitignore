@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+headsets
+headsets2
+headsets3
+pretrained-yolov3.h5
