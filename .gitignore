@@ -132,3 +132,8 @@ headsets
 headsets2
 headsets3
 pretrained-yolov3.h5
+Output/*
+TestImages/*
+
+!Output/output.txt
+!TestImages/testimages.txt

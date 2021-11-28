@@ -1,0 +1,26 @@
+<annotation>
+	<folder>MaskEdge</folder>
+	<filename>img_edge_mask_156.jpg</filename>
+	<path>D:\Users\John\Desktop\MaskEdge-20211027T005014Z-001\MaskEdge\img_edge_mask_156.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>500</width>
+		<height>500</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>mask</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>92</xmin>
+			<ymin>222</ymin>
+			<xmax>292</xmax>
+			<ymax>406</ymax>
+		</bndbox>
+	</object>
+</annotation>
