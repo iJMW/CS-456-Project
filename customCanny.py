@@ -36,9 +36,10 @@ def main():
     cv2.imshow('hysteresis image', img)
     cv2.waitKey(0)
   
-def runAlgorithm(filePath: str):
+def runAlgorithm(filePath, folderName, fileName):
     # Read the image
     img = cv2.imread(filePath)
+    img = cv2.resize(img, (500, 500))
     # Set the image to grayscale
     img = np.float32(cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY))
     img = img / img.max()
@@ -59,11 +60,7 @@ def runAlgorithm(filePath: str):
     img = hysteresis(img)
 
     # Write the file
-    indexSlash = filePath.rfind('/')
-    indexPeriod = filePath.rfind('.')
-    remove = len(filePath) - indexPeriod
-    fileName = filePath[indexSlash+1:-remove]
-    filepath = "./Output/" + fileName + "/edge_" + fileName + ".jpg"
+    filepath = folderName + "/" + "input_" + fileName + ".jpg"
     cv2.imwrite(filepath, img)
     
     # Return the image
