@@ -3,49 +3,53 @@ import numpy as np
 from scipy import ndimage
 
 def main():
-    # Read the image
-    img = cv2.imread("./Images/mask.jpg")
-    # Set the image to grayscale
-    img = np.float32(cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY))
-    img = img / img.max()
-    cv2.imshow('image', img)
-    cv2.waitKey(0)
     
-    # Get the noised reduced image
-    img = noise_reduction(img, 5, 1.5)
-    cv2.imshow('convolved image', img)
-    cv2.waitKey(0)
-    
-    # Get gradient calculated image
-    g, slope = gradient_calculation(img)
-    cv2.imshow('gradient calculated image', g)
-    cv2.waitKey(0)
-    
-    # Non-Max Suppression
-    img = non_max_suppression(g, slope)
-    cv2.imshow('non-max suppression image', img)
-    cv2.waitKey(0)
+    for i in range(201):
+        # Read the image
+        img = cv2.imread("./OriginalImages/Mask/img_mask_"+ str(i+1)+".jpg")
+        # img = cv2.resize(img, (500, 500))
+        # Set the image to grayscale
+        img = np.float32(cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY))
+        img = img / img.max()
+        # cv2.imshow('image', img)
+        # cv2.waitKey(0)
+        
+        # Get the noised reduced image
+        img = noise_reduction(img, 10, 1.5)
+        # cv2.imshow('convolved image', img)
+        # cv2.waitKey(0)
+        
+        # Get gradient calculated image
+        g, slope = gradient_calculation(img)
+        # cv2.imshow('gradient calculated image', g)
+        # cv2.waitKey(0)
+        
+        # Non-Max Suppression
+        img = non_max_suppression(g, slope)
+        # cv2.imshow('non-max suppression image', img)
+        # cv2.waitKey(0)
 
-    # double-threshold Suppression
-    img = double_threshold(img, 0.05, 0.15)
-    cv2.imshow('double-threshold image', img)
-    cv2.waitKey(0)
+        # double-threshold Suppression
+        img = double_threshold(img, 0.05, 0.15)
+        # cv2.imshow('double-threshold image', img)
+        # cv2.waitKey(0)
 
-    # hy Suppression
-    img = hysteresis(img)
-    cv2.imshow('hysteresis image', img)
-    cv2.waitKey(0)
-  
+        # hy Suppression
+        img = hysteresis(img)
+        # cv2.imshow('hysteresis image', img)
+        # cv2.waitKey(0)
+        cv2.imwrite("./EdgeImages/MaskEdgeUpdated/img_edge_mask_" + str(i+1) +".jpg", img)
+         
 def runAlgorithm(filePath, folderName, fileName):
     # Read the image
     img = cv2.imread(filePath)
-    img = cv2.resize(img, (500, 500))
+    # img = cv2.resize(img, (500, 500))
     # Set the image to grayscale
     img = np.float32(cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY))
     img = img / img.max()
     
     # Get the noised reduced image
-    img = noise_reduction(img, 5, 1.5)
+    img = noise_reduction(img, 10, 1.5)
     
     # Get gradient calculated image
     g, slope = gradient_calculation(img)
@@ -97,6 +101,51 @@ def gradient_calculation(img):
     theta = np.arctan2(Iy, Ix)
 
     return (G, theta)
+
+# # Thins out edges
+# def non_max_suppression(img, angleDirection):
+#     #Gets the size of the image
+#     (row, col) = img.shape
+#     #Creates a matrix of zeros
+#     nonMaxMatrix = np.zeros((row, col), dtype=np.float32)
+#     # Get the angle
+#     angle = angleDirection # * 180. / np.pi
+#     # Any values less than 0, add 180 to them
+#     angle[angle < 0] += np.pi # 180
+
+#     #Iterates over all the pixels
+#     for i in range(1, row-1):
+#         for j in range(1, col-1):
+#             #Assigns the neighboring pixels adjacent to the current pixel
+#             prevPixel = img[i, j]
+#             nextPixel = img[i, j]
+
+#             #Checks the pixels on the left and right
+#             if((0 <= angleDirection[i, j] < np.pi/8) or (7*np.pi/8 <= angleDirection[i, j] < np.pi)):
+#                 prevPixel = img[i, j+1]
+#                 nextPixel = img[i, j-1]
+#             #Checks the pixels on the top right and bottom left
+#             elif(np.pi/8 <= angleDirection[i, j] < 3*np.pi/8):
+#                 prevPixel = img[i+1, j-1]
+#                 nextPixel = img[i-1, j+1]
+#             #Checks the pixels on the top middle and bottom middle
+#             elif(3*np.pi/8 <= angleDirection[i, j] < 5*np.pi/8):
+#                 prevPixel = img[i+1, j]
+#                 nextPixel = img[i-1, j]
+#             #Checks the pixels on the top left and bottom right
+#             #Default case
+#             else:
+#                 prevPixel = img[i-1, j-1]
+#                 nextPixel = img[i+1, j+1]
+
+#             #If the intensity of the current pixel is greater than the previous or next pixel, assign the value in the non max matrix
+#             if((img[i, j] >= prevPixel) and (img[i,j] >= nextPixel)):
+#                 nonMaxMatrix[i, j] = img[i, j]
+#             else:
+#                 nonMaxMatrix[i, j] = 0 
+    
+#     # Return the matrix
+#     return nonMaxMatrix
 
 # Gets rid of extra edges
 def non_max_suppression(img, angleDirection):
@@ -185,6 +234,7 @@ def hysteresis(img):
     # White color used to mark strong pixels
     white = np.float32(255)
 
+    # Top to bottom
     # Iterate through the rows
     for i in range(1, m-1):
         # Iterate through the columns
@@ -205,6 +255,7 @@ def hysteresis(img):
                 # Catch the index out of bounds error and continue
                 except IndexError:
                     pass
+
     return img
 
 if __name__ == "__main__":
