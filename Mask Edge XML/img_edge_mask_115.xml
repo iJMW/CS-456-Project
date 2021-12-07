@@ -1,7 +1,7 @@
 <annotation>
 	<folder>MaskEdge</folder>
 	<filename>img_edge_mask_115.jpg</filename>
-	<path>C:\Users\Logan Bland\Pictures\MaskEdge\img_edge_mask_115.jpg</path>
+	<path>..\EdgeImages\MaskEdge\img_edge_mask_115.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
