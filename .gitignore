@@ -128,13 +128,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-OriginalImages/
+.vscode/
 
-MaskEdgeUpdated/
+Images/
 
-headsets
-headsets2
-headsets3
+Training/*
+
 pretrained-yolov3.h5
 Output/*
 TestImages/*
