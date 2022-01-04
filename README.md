@@ -14,7 +14,7 @@ Description Here
 
 ### Course Information
 
-Title: CS 456- Digital Image Processing<br />
+Title: CS 456 - Digital Image Processing<br />
 Course Professor: [Dr. Sanish Rai](https://engineering.wvutech.edu/faculty-and-staff/bhanukiran-gurijala)<br />
 College: [West Virginia University Institute of Technology](https://www.wvutech.edu/)
 
@@ -25,4 +25,4 @@ Environment: Python 3.7.6
 
 ### Utilizing the Code
 
-This code should not be used by students taking the Operating Systems (CS 450) at WVU Tech. The copying of the code for use in another student's code is dishonest. However, individuals are free to use the code as inspiration for their own project if appropriate citations are provided. An appropriate citation would include a link to this repository.
+This code should not be used by students taking the Digital Image Processing (CS 456) course at WVU Tech, or anybody else that may be interested in the project. The copying of the code for use in another student's code is dishonest. However, individuals are free to use the code as inspiration for their own project if appropriate citations are provided. An appropriate citation would include a link to this repository.
