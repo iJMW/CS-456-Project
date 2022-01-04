@@ -15,7 +15,7 @@ Description Here
 ### Course Information
 
 Title: CS 456 - Digital Image Processing<br />
-Course Professor: [Dr. Sanish Rai](https://engineering.wvutech.edu/faculty-and-staff/bhanukiran-gurijala)<br />
+Course Professor: [Dr. Sanish Rai](https://engineering.wvutech.edu/faculty-and-staff-directory/sanish-rai)<br />
 College: [West Virginia University Institute of Technology](https://www.wvutech.edu/)
 
 ### Code Information
